@@ -53,7 +53,7 @@ else:
     print(resto_divisao)
 
 
-# RESOLUÇÃO:
+# SOLUÇÃO:
 
 cpf = '74682489070'
 nove_digitos = cpf[:9]
