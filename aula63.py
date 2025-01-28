@@ -1,3 +1,41 @@
+# SOLUÇÃO:
+
+# cpf_enviado_usuario = '746.824.890-70'
+# nove_digitos = cpf_enviado_usuario[:9]
+# contador_regressivo_1 = 10
+
+# resultado_digito_1 = 0
+
+# for digito_1 in nove_digitos:
+
+#     resultado_digito_1 += int(digito_1) * contador_regressivo_1
+#     contador_regressivo_1 -= 1
+
+# digito_1 = (resultado_digito_1 * 10) % 11
+# digito_1 = digito_1 if digito_1 <= 9 else 0
+
+
+# dez_digitos = nove_digitos + str(digito_1)
+# contador_regressivo_2 = 11
+
+# resultado_digito_2 = 0
+
+# for digito in dez_digitos:
+#     resultado_digito_2 += int(digito) * contador_regressivo_2
+#     contador_regressivo_2 -= 1
+
+# digito_2 = (resultado_digito_2 * 10) % 11
+# digito_2 = digito_2 if digito_2 <= 9 else 0
+
+# cpf_gerado_pelo_calculo = f'{nove_digitos}{digito_1}{digito_2}'
+
+# if cpf_enviado_usuario == cpf_gerado_pelo_calculo:
+#     print(f'{cpf_enviado_usuario} é válido.')
+
+# else:
+#     print(f'{cpf_enviado_usuario} inválido.')
+
+
 """
 Calculo do segundo dígito do CPF
 CPF: 746.824.890-70
@@ -24,55 +62,50 @@ contrário disso:
 
 O segundo dígito do CPF é 0
 """
-# O QUE EU TENTEI:
+# cpf = '36440847007'  # Esse CPF gera o primeiro dígito como 10 (0)
+import re
+import sys
 
-# cpf = '74682489070'
-# dez_digitos = cpf[:10]
-# regressiva_2 = 11
-# resultado_digito_2 = 0
+# cpf_enviado_usuario = '746.824.890-70' \
+#     .replace('.', '') \
+#     .replace(' ', '') \
+#     .replace('-', '')
+entrada = input('CPF [746.824.890-70]: ')
+cpf_enviado_usuario = re.sub(
+    r'[^0-9]',
+    '',
+    entrada
+)
 
-# for digito_1 in dez_digitos:
-#     resultado_digito_2 += int(digito_1) * regressiva_2
-#     regressiva_2 -= 1
+entrada_e_sequencial = entrada == entrada[0] * len(entrada)
 
-# digito_1 = (resultado_digito_2 * 10) % 11
-# digito_1 = digito_1 if digito_1 > 9 else 0
-# print(digito_1)
+if entrada_e_sequencial:
+    print('Você enviou dados sequenciais.')
+    sys.exit()
 
-
-# SOLUÇÃO:
-
-cpf_enviado_usuario = '74682489070'
 nove_digitos = cpf_enviado_usuario[:9]
 contador_regressivo_1 = 10
 
 resultado_digito_1 = 0
-
-for digito_1 in nove_digitos:
-
-    resultado_digito_1 += int(digito_1) * contador_regressivo_1
+for digito in nove_digitos:
+    resultado_digito_1 += int(digito) * contador_regressivo_1
     contador_regressivo_1 -= 1
-
 digito_1 = (resultado_digito_1 * 10) % 11
 digito_1 = digito_1 if digito_1 <= 9 else 0
-
 
 dez_digitos = nove_digitos + str(digito_1)
 contador_regressivo_2 = 11
 
 resultado_digito_2 = 0
-
 for digito in dez_digitos:
     resultado_digito_2 += int(digito) * contador_regressivo_2
     contador_regressivo_2 -= 1
-
 digito_2 = (resultado_digito_2 * 10) % 11
 digito_2 = digito_2 if digito_2 <= 9 else 0
 
 cpf_gerado_pelo_calculo = f'{nove_digitos}{digito_1}{digito_2}'
 
 if cpf_enviado_usuario == cpf_gerado_pelo_calculo:
-    print(f'{cpf_enviado_usuario} é válido.')
-
+    print(f'{cpf_enviado_usuario} é válido')
 else:
-    print(f'{cpf_enviado_usuario} inválido.')
+    print('CPF inválido')
